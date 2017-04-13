@@ -1,5 +1,7 @@
 # Fluent.Xml
-A Library to make easy work with xml.
+```
+Install-Package Fluent.Xml
+```
 
 # Introduction
 Library to make easy manipulation of xml files, this version does not support deep deserialization, it will be implemented soon.
