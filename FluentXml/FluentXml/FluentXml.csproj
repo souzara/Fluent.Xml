@@ -40,10 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\AttributeConfiguration.cs" />
+    <Compile Include="Configurations\WithNameConfiguration.cs" />
     <Compile Include="Extensions\ObjectConvertExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="FluentXml.cs" />
     <Compile Include="Handlers\ResolveUnconvertibleTypeArgs.cs" />
     <Compile Include="Handlers\ResolveUnconvertibleTypeHandler.cs" />
+    <Compile Include="Interfaces\IPropertyConfiguration.cs" />
     <Compile Include="Interfaces\IXmlMappingConfiguration.cs" />
     <Compile Include="Interfaces\IXmlElementConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

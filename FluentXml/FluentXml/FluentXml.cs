@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Fluent.Xml.Extensions;
 using Fluent.Xml.Handlers;
+using Fluent.Xml.Configurations;
 
 namespace Fluent.Xml
 {
@@ -52,17 +53,18 @@ namespace Fluent.Xml
                 foreach (var elementConfiguration in xmlMappingConfiguration.Configurations)
                 {
                     var elementType = resultType.GetProperty(elementConfiguration.PropertyName);
-                    var elementName = elementConfiguration.Configurations.FirstOrDefault(x => x.Key == "WithName").Value ?? elementConfiguration.PropertyName;
+
+                    var elementName = elementConfiguration.Configurations.FirstOrDefault(x => x is WithNameConfiguration) as WithNameConfiguration ?? new WithNameConfiguration(elementConfiguration.PropertyName);
 
                     var elementValue = (from el in xmlDocument.Descendants()
-                                        where string.Equals(elementName, el.Name.LocalName, StringComparison.OrdinalIgnoreCase)
+                                        where string.Equals(elementName.Name, el.Name.LocalName, StringComparison.OrdinalIgnoreCase)
                                         select el).FirstOrDefault();
 
-                    foreach (var attribute in elementConfiguration.attributesConfigurations)
+                    foreach (AttributeConfiguration attribute in elementConfiguration.Configurations.Where(x => x is AttributeConfiguration))
                     {
-                        var attributeType = resultType.GetProperty(attribute.Value.PropertyName);
+                        var attributeType = resultType.GetProperty(attribute.PropertyName);
                         var atttributeValue = (from at in elementValue.Attributes()
-                                               where string.Equals(at.Name.LocalName, attribute.Value.AttributeName, StringComparison.OrdinalIgnoreCase)
+                                               where string.Equals(at.Name.LocalName, attribute.AttributeName, StringComparison.OrdinalIgnoreCase)
                                                select at).FirstOrDefault();
 
                         attributeType.SetValue(result, atttributeValue?.Value.ChangeType(attributeType.PropertyType));
@@ -89,15 +91,15 @@ namespace Fluent.Xml
             foreach (var elementConfiguration in xmlMappingConfiguration.Configurations)
             {
                 var propertyType = objType.GetProperty(elementConfiguration.PropertyName);
-                var elementName = elementConfiguration.Configurations.FirstOrDefault(x => x.Key == "WithName").Value ?? elementConfiguration.PropertyName;
+                var elementName = elementConfiguration.Configurations.FirstOrDefault(x => x is WithNameConfiguration) as WithNameConfiguration ?? new WithNameConfiguration(elementConfiguration.PropertyName);
                 var value = propertyType.GetValue(obj);
-                var element = new XElement(XName.Get(elementName), value);
+                var element = new XElement(XName.Get(elementName.Name), value);
 
-                foreach (var attribute in elementConfiguration.attributesConfigurations)
+                foreach (AttributeConfiguration attribute in elementConfiguration.Configurations.Where(x => x is AttributeConfiguration))
                 {
-                    var property = objType.GetProperty(attribute.Value.PropertyName);
+                    var property = objType.GetProperty(attribute.PropertyName);
                     var propertyValue = property.GetValue(obj);
-                    element.Add(new XAttribute(XName.Get(attribute.Value.AttributeName), propertyValue ?? string.Empty));
+                    element.Add(new XAttribute(XName.Get(attribute.AttributeName), propertyValue ?? string.Empty));
                 }
 
                 decendantsElements.Add(element);
@@ -114,15 +116,31 @@ namespace Fluent.Xml
             }
         }
         #endregion
-        
+
         #region Commom
-        private static XmlMappingConfiguration<TResult> GetXmlMappingConfiguration<TResult>() where TResult : class, new()
+        private static IXmlMappingConfiguration GetXmlMappingConfiguration(Type type)
         {
-            var xmlMappingConfiguration = xmlMappingsConfigurations.FirstOrDefault(x => x.GetType().BaseType == typeof(XmlMappingConfiguration<TResult>));
-            if (xmlMappingConfiguration == null)
-                throw new InvalidOperationException($"XmlMappingConfiguration not found for type {typeof(TResult).FullName}");
-            return xmlMappingConfiguration as XmlMappingConfiguration<TResult>;
-        } 
+            if (!TypeIsMapped(type))
+                throw new InvalidOperationException($"XmlMappingConfiguration not found for type {type.FullName}");
+            var xmlMappingConfiguration = xmlMappingsConfigurations.FirstOrDefault(x => x.ObjectType == type);
+
+            return xmlMappingConfiguration;
+        }
+        private static IXmlMappingConfiguration GetXmlMappingConfiguration<TResult>()
+        {
+            return GetXmlMappingConfiguration(typeof(TResult));
+        }
+
+        private static bool TypeIsMapped(Type type)
+        {
+            if (type.IsEnumerable())
+            {
+                if (type.GetGenericArguments().Count() == 0)
+                    return false;
+                return xmlMappingsConfigurations.Count(x => x.ObjectType == type.GetGenericArgument()) > 0;
+            }
+            return xmlMappingsConfigurations.Count(x => x.ObjectType == type) > 0;
+        }
         #endregion
     }
 }

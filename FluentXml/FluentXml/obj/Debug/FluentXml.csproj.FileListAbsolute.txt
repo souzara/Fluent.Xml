@@ -1,0 +1,5 @@
+C:\Users\ricar\Source\Repos\Fluent.Xml\FluentXml\FluentXml\bin\Debug\Fluent.Xml.dll
+C:\Users\ricar\Source\Repos\Fluent.Xml\FluentXml\FluentXml\bin\Debug\Fluent.Xml.pdb
+C:\Users\ricar\Source\Repos\Fluent.Xml\FluentXml\FluentXml\obj\Debug\FluentXml.csprojResolveAssemblyReference.cache
+C:\Users\ricar\Source\Repos\Fluent.Xml\FluentXml\FluentXml\obj\Debug\Fluent.Xml.dll
+C:\Users\ricar\Source\Repos\Fluent.Xml\FluentXml\FluentXml\obj\Debug\Fluent.Xml.pdb

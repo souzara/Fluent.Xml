@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using Fluent.Xml.Interfaces;
 using System.Linq.Expressions;
+using Fluent.Xml.Configurations;
 
 namespace Fluent.Xml
 {
     public class XmlElementConfiguration<TObject> : IXmlElementConfiguration<TObject> where TObject : class, new()
     {
-        private readonly Dictionary<string, string> configurations = new Dictionary<string, string>();
-        internal readonly Dictionary<string, AttributeConfiguration> attributesConfigurations = new Dictionary<string, AttributeConfiguration>();
+        private readonly IList<IPropertyConfiguration> configurations = new List<IPropertyConfiguration>();
+
         private readonly string propertyName;
 
         public string PropertyName { get { return propertyName; } }
 
-        public Dictionary<string, string> Configurations { get { return configurations; } }
+        public IList<IPropertyConfiguration> Configurations { get { return configurations; } }
 
         public XmlElementConfiguration(string propertyName)
         {
@@ -22,18 +23,14 @@ namespace Fluent.Xml
 
         public IXmlElementConfiguration<TObject> WithName(string name)
         {
-            Configurations.Add(nameof(WithName), name);
+            Configurations.Add(new WithNameConfiguration(name));
             return this;
         }
 
         public IXmlElementConfiguration<TObject> AddAttribute<TPropertyType>(string attributeName, Expression<Func<TObject, TPropertyType>> property)
         {
-            string propName = GetPropertyName(property);
-            attributesConfigurations.Add("attribute", new AttributeConfiguration
-            {
-                AttributeName = attributeName,
-                PropertyName = propName
-            });
+            string propertyName = GetPropertyName(property);
+            Configurations.Add(new AttributeConfiguration(attributeName, propertyName));
             return this;
         }
 
@@ -47,10 +44,5 @@ namespace Fluent.Xml
             return propName;
         }
 
-        internal struct AttributeConfiguration
-        {
-            public string AttributeName { get; set; }
-            public string PropertyName { get; set; }
-        }
     }
 }

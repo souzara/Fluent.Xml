@@ -5,12 +5,16 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Fluent.Xml.Interfaces
 {
-    public interface IXmlElementConfiguration<TObject> where TObject : class , new()
+    public interface IXmlElementConfiguration
     {
-        Dictionary<string, string> Configurations { get; }
+        IList<IPropertyConfiguration> Configurations { get; }
         string PropertyName { get; }
+    }
+    public interface IXmlElementConfiguration<TObject> : IXmlElementConfiguration where TObject : class, new()
+    {
         IXmlElementConfiguration<TObject> WithName(string name);
         IXmlElementConfiguration<TObject> AddAttribute<TPropertyType>(string attributeName, Expression<Func<TObject, TPropertyType>> property);
     }

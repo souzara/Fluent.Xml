@@ -8,12 +8,13 @@ using System.Linq.Expressions;
 
 namespace Fluent.Xml
 {
-    public class XmlMappingConfiguration<TObject> : Interfaces.IXmlMappingConfiguration<TObject> where TObject : class, new()
+    public class XmlMappingConfiguration<TObject> : IXmlMappingConfiguration where TObject : class, new()
     {
-        private List<XmlElementConfiguration<TObject>> configurations = new List<XmlElementConfiguration<TObject>>();
+        private List<IXmlElementConfiguration> configurations = new List<IXmlElementConfiguration>();
         private readonly string rootElementName;
+        public Type ObjectType { get { return typeof(TObject); } }
 
-        public IList<XmlElementConfiguration<TObject>> Configurations { get { return configurations; } }
+        public IList<IXmlElementConfiguration> Configurations { get { return configurations; } }
         public string RootElementName { get { return rootElementName; } }
         public XmlMappingConfiguration() : this(null) { }
         public XmlMappingConfiguration(string rootElementName)
