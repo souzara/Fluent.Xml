@@ -1,4 +1,4 @@
-# Nuget Packges
+# Nuget Packages
 ```
 Install-Package Fluent.Xml
 ```
