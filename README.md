@@ -1,2 +1,14 @@
 # Fluent.Xml
-A LIbrary to make easy work with xml.
+A Library to make easy work with xml.
+
+# Introduction
+TODO: 
+
+# Getting Started
+TODO: 
+
+# Build and Test
+TODO: 
+
+# Contribute
+TODO: 
