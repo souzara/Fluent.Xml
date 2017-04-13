@@ -12,6 +12,6 @@ namespace Fluent.Xml.Tests.Models
         public string PackageName { get; set; }
         public string Description { get; set; }
 
-        public string Id { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -40,13 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\ObjectConvertExtensions.cs" />
     <Compile Include="FluentXml.cs" />
+    <Compile Include="Handlers\ResolveUnconvertibleTypeArgs.cs" />
+    <Compile Include="Handlers\ResolveUnconvertibleTypeHandler.cs" />
     <Compile Include="Interfaces\IXmlMappingConfiguration.cs" />
     <Compile Include="Interfaces\IXmlElementConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlElementConfiguration.cs" />
     <Compile Include="XmlMappingConfiguration.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

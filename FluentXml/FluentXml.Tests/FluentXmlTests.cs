@@ -30,7 +30,7 @@ namespace Fluent.Xml.Tests
                 Author = "Ricardo Alves",
                 PackageName = "FluentXml",
                 Description = "This library is awesome =D",
-                Id = "10"
+                Id = 10
             };
             var fluentXml = FluentXml.Serialize(obj);
             Assert.NotNull(fluentXml);

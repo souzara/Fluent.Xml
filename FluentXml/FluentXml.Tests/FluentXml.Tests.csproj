@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\ObjectConvertExtensionsTests.cs" />
     <Compile Include="FluentXmlTests.cs" />
     <Compile Include="Models\FluentXmlModel.cs" />
     <Compile Include="Models\FluentXmlModelWithAttribute.cs" />
