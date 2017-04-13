@@ -29,12 +29,14 @@ namespace Fluent.Xml.Tests
             {
                 Author = "Ricardo Alves",
                 PackageName = "FluentXml",
-                Description = "This library is awesome =D"
+                Description = "This library is awesome =D",
+                Id = "10"
             };
             var fluentXml = FluentXml.Serialize(obj);
             Assert.NotNull(fluentXml);
             Assert.True(string.Equals(Resources.Xmls.fluentxml_xml, fluentXml, StringComparison.InvariantCultureIgnoreCase));
         }
+
     }
 
     public class FluentXmlMappingConfiguration : Fluent.Xml.XmlMappingConfiguration<Models.FluentXmlModel>
@@ -42,7 +44,7 @@ namespace Fluent.Xml.Tests
         public FluentXmlMappingConfiguration() : base("FluentXml")
         {
             //WithName configuration
-            HasElement(x => x.Author).WithName("Author");
+            HasElement(x => x.Author).WithName("Author").AddAttribute("Id", x => x.Id);
             //Without WithName, the property name will be used with element name
             HasElement(x => x.PackageName);
             HasElement(x => x.Description).WithName("Description");

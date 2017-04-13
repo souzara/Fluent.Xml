@@ -16,10 +16,10 @@ namespace Fluent.Xml
         {
             xmlMappingsConfigurations.Add(new TXmlMappingConfiguration());
         }
-
+         
         public static TResult Deserialize<TResult>(string xml) where TResult : class, new()
         {
-            IXmlMappingConfiguration xmlMappingConfiguration = GetXmlMappingConfiguration<TResult>();
+            var xmlMappingConfiguration = GetXmlMappingConfiguration<TResult>();
 
             var result = new TResult();
             var resultType = result.GetType();
@@ -31,11 +31,23 @@ namespace Fluent.Xml
                     var propertyType = resultType.GetProperty(elementConfiguration.PropertyName);
                     var elementName = elementConfiguration.Configurations.FirstOrDefault(x => x.Key == "WithName").Value ?? elementConfiguration.PropertyName;
 
-                    var value = (from el in xmlDocument.Descendants()
+                    var element = (from el in xmlDocument.Descendants()
                                  where string.Equals(elementName, el.Name.LocalName, StringComparison.OrdinalIgnoreCase)
-                                 select el).FirstOrDefault()?.Value;
+                                 select el).FirstOrDefault();
 
-                    propertyType.SetValue(result, value);
+                    foreach (var attribute in elementConfiguration.attributesConfigurations)
+                    {
+                        var property = resultType.GetProperty(attribute.Value.PropertyName);
+                        var attrValue = (from at in element.Attributes()
+                                         where string.Equals(at.Name.LocalName, attribute.Value.AttributeName, StringComparison.OrdinalIgnoreCase)
+                                         select at).FirstOrDefault();
+
+                        property.SetValue(result, attrValue?.Value);
+
+
+                    }
+
+                    propertyType.SetValue(result, element?.Value);
                 }
             }
 
@@ -56,7 +68,16 @@ namespace Fluent.Xml
                 var propertyType = objType.GetProperty(elementConfiguration.PropertyName);
                 var elementName = elementConfiguration.Configurations.FirstOrDefault(x => x.Key == "WithName").Value ?? elementConfiguration.PropertyName;
                 var value = propertyType.GetValue(obj);
-                decendantsElements.Add(new XElement(XName.Get(elementName), value));
+                var element = new XElement(XName.Get(elementName), value);
+                
+                foreach (var attribute in elementConfiguration.attributesConfigurations)
+                {
+                    var property = objType.GetProperty(attribute.Value.PropertyName);
+                    var propertyValue = property.GetValue(obj);
+                    element.Add(new XAttribute(XName.Get(attribute.Value.AttributeName), propertyValue ?? string.Empty));
+                }
+
+                decendantsElements.Add(element);
             }
 
             var rootElement = new XElement(XName.Get(xmlMappingConfiguration.RootElementName));
@@ -69,12 +90,12 @@ namespace Fluent.Xml
                 return Encoding.UTF8.GetString(stream.ToArray());
             }
         }
-        private static IXmlMappingConfiguration GetXmlMappingConfiguration<TResult>() where TResult : class, new()
+        private static XmlMappingConfiguration<TResult> GetXmlMappingConfiguration<TResult>() where TResult : class, new()
         {
             var xmlMappingConfiguration = xmlMappingsConfigurations.FirstOrDefault(x => x.GetType().BaseType == typeof(XmlMappingConfiguration<TResult>));
             if (xmlMappingConfiguration == null)
                 throw new InvalidOperationException($"XmlMappingConfiguration not found for type {typeof(TResult).FullName}");
-            return xmlMappingConfiguration;
+            return xmlMappingConfiguration as XmlMappingConfiguration<TResult>;
         }
     }
 }

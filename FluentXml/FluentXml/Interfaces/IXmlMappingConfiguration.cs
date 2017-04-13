@@ -8,7 +8,11 @@ namespace Fluent.Xml.Interfaces
 {
     public interface IXmlMappingConfiguration
     {
-        IList<IXmlElementConfiguration> Configurations { get; }
+
+    }
+    public interface IXmlMappingConfiguration<TObject> : IXmlMappingConfiguration where TObject : class, new()
+    {
+        IList<XmlElementConfiguration<TObject>> Configurations { get; }
         string RootElementName { get; }
     }
 }

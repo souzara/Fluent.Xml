@@ -8,12 +8,12 @@ using System.Linq.Expressions;
 
 namespace Fluent.Xml
 {
-    public class XmlMappingConfiguration<TObject> : Interfaces.IXmlMappingConfiguration where TObject : class, new()
+    public class XmlMappingConfiguration<TObject> : Interfaces.IXmlMappingConfiguration<TObject> where TObject : class, new()
     {
-        private List<IXmlElementConfiguration> configurations = new List<IXmlElementConfiguration>();
+        private List<XmlElementConfiguration<TObject>> configurations = new List<XmlElementConfiguration<TObject>>();
         private readonly string rootElementName;
 
-        public IList<IXmlElementConfiguration> Configurations { get { return configurations; } }
+        public IList<XmlElementConfiguration<TObject>> Configurations { get { return configurations; } }
         public string RootElementName { get { return rootElementName; } }
         public XmlMappingConfiguration() : this(null) { }
         public XmlMappingConfiguration(string rootElementName)
@@ -21,7 +21,7 @@ namespace Fluent.Xml
             this.rootElementName = rootElementName ?? typeof(TObject).Name;
         }
 
-        protected IXmlElementConfiguration HasElement<TPropertyType>(Expression<Func<TObject, TPropertyType>> property)
+        protected IXmlElementConfiguration<TObject> HasElement<TPropertyType>(Expression<Func<TObject, TPropertyType>> property)
         {
             string propName;
             if (property.Body is UnaryExpression)
@@ -29,7 +29,7 @@ namespace Fluent.Xml
             else
                 propName = ((MemberExpression)property.Body).Member.Name;
 
-            var xmlElementConfiguration = new XmlElementConfiguration(propName);
+            var xmlElementConfiguration = new XmlElementConfiguration<TObject>(propName);
             configurations.Add(xmlElementConfiguration);
             return xmlElementConfiguration;
         }

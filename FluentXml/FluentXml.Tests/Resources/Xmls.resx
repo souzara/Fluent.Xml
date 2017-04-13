@@ -120,7 +120,7 @@
   <data name="fluentxml_xml" xml:space="preserve">
     <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;FluentXml&gt;
-  &lt;Author&gt;Ricardo Alves&lt;/Author&gt;
+  &lt;Author Id="10"&gt;Ricardo Alves&lt;/Author&gt;
   &lt;PackageName&gt;FluentXml&lt;/PackageName&gt;
   &lt;Description&gt;This library is awesome =D&lt;/Description&gt;
 &lt;/FluentXml&gt;</value>

@@ -63,7 +63,7 @@ namespace Fluent.Xml.Tests.Resources {
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;FluentXml&gt;
-        ///  &lt;Author&gt;Ricardo Alves&lt;/Author&gt;
+        ///  &lt;Author Id=&quot;10&quot;&gt;Ricardo Alves&lt;/Author&gt;
         ///  &lt;PackageName&gt;FluentXml&lt;/PackageName&gt;
         ///  &lt;Description&gt;This library is awesome =D&lt;/Description&gt;
         ///&lt;/FluentXml&gt;.
