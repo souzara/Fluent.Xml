@@ -1,11 +1,11 @@
-# version 1.1.0
+# version 1.2.0
 # Nuget Packages
 ```
 Install-Package Fluent.Xml
 ```
 
 # Introduction
-Library to make easy manipulation of xml files, this version does not support deep deserialization, it will be implemented soon.
+Library to make easy manipulation of xml files.
 
 # Getting Started - Usage
 ``` C#
