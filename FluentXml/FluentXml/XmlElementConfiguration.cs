@@ -16,9 +16,14 @@ namespace Fluent.Xml
 
         public IList<IPropertyConfiguration> Configurations { get { return configurations; } }
 
-        public XmlElementConfiguration(string propertyName)
+        public bool IsComplex { get; private set; }
+
+        public Type PropertyType { get; private set; }
+
+        public XmlElementConfiguration(string propertyName, Type propertyType)
         {
             this.propertyName = propertyName;
+            PropertyType = propertyType;
         }
 
         public IXmlElementConfiguration<TObject> WithName(string name)
@@ -34,6 +39,12 @@ namespace Fluent.Xml
             return this;
         }
 
+        public IXmlElementConfiguration<TObject> Complex()
+        {
+            IsComplex = true;
+            return this;
+        }
+
         private static string GetPropertyName<TPropertyType>(Expression<Func<TObject, TPropertyType>> property)
         {
             string propName;
@@ -43,6 +54,7 @@ namespace Fluent.Xml
                 propName = ((MemberExpression)property.Body).Member.Name;
             return propName;
         }
+
 
     }
 }

@@ -59,9 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ObjectConvertExtensionsTests.cs" />
+    <Compile Include="FluentMappings\FluentXmlMappingConfiguration.cs" />
+    <Compile Include="FluentMappings\MoviesXmlMapping.cs" />
     <Compile Include="FluentXmlTests.cs" />
     <Compile Include="Models\FluentXmlModel.cs" />
     <Compile Include="Models\FluentXmlModelWithAttribute.cs" />
+    <Compile Include="Models\MoviesXmlModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Xmls.Designer.cs">
       <AutoGen>True</AutoGen>

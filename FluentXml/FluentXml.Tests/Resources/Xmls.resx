@@ -125,4 +125,28 @@
   &lt;Description&gt;This library is awesome =D&lt;/Description&gt;
 &lt;/FluentXml&gt;</value>
   </data>
+  <data name="movies_2016_xml" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;Movies&gt;
+  &lt;Total&gt;3&lt;/Total&gt;
+  &lt;Year&gt;2016&lt;/Year&gt;
+  &lt;MoviesList&gt;
+    &lt;Movie&gt;
+      &lt;Name&gt;Justin Timberlake + The Tennessee Kids&lt;/Name&gt;
+      &lt;Description&gt;Jonathan Demme's acclaimed career may include numerous beloved dramas and comedies—from Something Wild and Married to the Mob to The Silence of the Lambs, Philadelphia, and Rachel Getting Married—but he's also the world's foremost music-concert documentarian. In the grand tradition of Stop Making Sense and Neil Young: Heart of Gold, Justin Timberlake + The Tennessee Kids is a thrilling showstopper focused on its headliner as he completes his two-year 20/20 Experience World Tour with two final shows at Las Vegas' MGM Grand (in January 2015) alongside his enormous backing band, the Tennessee Kids. Demme captures Timberlake's multifaceted talents in a collection of rousing greatest-hits numbers, which place a premium on in-the-moment artistry. In the way his camera pans in long unbroken takes between Timberlake and his fellow on-stage singers, guitarists, keyboardists and horn players (as well as frames him amidst a sea of adoring arena fans) Demme subtly celebrates the joyous collaborative spirit that guides Timberlake's infectious shows—and elevates him above his pop-star peers.&lt;/Description&gt;
+    &lt;/Movie&gt;
+    &lt;Movie&gt;
+      &lt;Name&gt;Kill Zone 2&lt;/Name&gt;
+      &lt;Description&gt;Don't worry if you haven't seen the 2005 precursor to this Hong Kong-Chinese import (also known as SPLII: A Time for Consequences)—aside from their titles, the two films share no relationship. And don't worry if you can't follow its myriad crime-saga plot strands, which involves a dying Hong Kong gangster (Louis Koo) who sells organs on the black market and plans to kill his brother so he can steal his heart, a Hong Kong undercover cop (Wu Jing) intent on infiltrating this kingpin's gang, and a Thailand prison guard (Tony Jaa) trying to save his daughter who is dying of leukemia. What matters here is that director Cheang Pou-soi's film features the finest hand-to-hand skirmishes of the year, with Wu Jing demonstrating deft martial-arts skills and Jaa—he of Ong-Bak: The Thai Warrior fame—bringing the concussive thunder via his trademark elbow drops and flying knee attacks, which peak with him leaping, knees first, through the windshield of a moving bus. The film's melodrama and comedy (including a subplot involving a Down's Syndrome-afflicted teen texting with a dying child via emojis) are overcooked, but Jaa and Jing's fighting prowess make this a must-see for genre aficionados.&lt;/Description&gt;
+    &lt;/Movie&gt;
+    &lt;Movie&gt;
+      &lt;Name&gt;Ouija: Origin of Evil&lt;/Name&gt;
+      &lt;Description&gt;Just about everybody agreed that 2014's Ouija, based on the popular contact-the-dead board game, was a dud. But this Halloween season's follow-up, Origin of Evil, is an altogether different beast—a sterling '60s-set period piece that's only loosely related to its predecessor, and one that manufactures terror by first making one care about its well-drawn characters. In this case, those are a mother and two daughters who, while running a séance scam out of their home, wind up in real supernatural trouble when the youngest of their clan (Lulu Wilson) makes contact with what she initially believes is the spirit of her dead father. Another superb chiller from director Mike Flanagan (Oculus, Hush)—mainstream horror's best new filmmaker—about the peril that can come from grieving lost loved ones, this stylish work is a throwback in terms of not only its setting, but also its preference for hold-your-breath suspense and unforgettable otherworldly imagery over cheap scare tactics&lt;/Description&gt;
+    &lt;/Movie&gt;
+  &lt;/MoviesList&gt;
+  &lt;Author&gt;
+	&lt;Name&gt;Ricardo Alves&lt;/Name&gt;
+  &lt;/Author&gt;
+&lt;/Movies&gt;</value>
+  </data>
 </root>

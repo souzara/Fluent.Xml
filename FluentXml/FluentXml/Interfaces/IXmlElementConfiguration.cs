@@ -12,10 +12,14 @@ namespace Fluent.Xml.Interfaces
     {
         IList<IPropertyConfiguration> Configurations { get; }
         string PropertyName { get; }
+        bool IsComplex { get; }
+        Type PropertyType { get; }
+        
     }
     public interface IXmlElementConfiguration<TObject> : IXmlElementConfiguration where TObject : class, new()
     {
         IXmlElementConfiguration<TObject> WithName(string name);
         IXmlElementConfiguration<TObject> AddAttribute<TPropertyType>(string attributeName, Expression<Func<TObject, TPropertyType>> property);
+        IXmlElementConfiguration<TObject> Complex();
     }
 }

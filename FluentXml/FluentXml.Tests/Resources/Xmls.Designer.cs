@@ -73,5 +73,21 @@ namespace Fluent.Xml.Tests.Resources {
                 return ResourceManager.GetString("fluentxml_xml", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;Movies&gt;
+        ///  &lt;Total&gt;3&lt;/Total&gt;
+        ///  &lt;Year&gt;2016&lt;/Year&gt;
+        ///  &lt;MoviesList&gt;
+        ///    &lt;Movie&gt;
+        ///      &lt;Name&gt;Justin Timberlake + The Tennessee Kids&lt;/Name&gt;
+        ///      &lt;Description&gt;Jonathan Demme&apos;s acclaimed career may include numerous beloved dramas and comedies—from Something Wild and Married to the Mob to The Silence of the Lambs, Philadelphia, and Rachel Getting Married—but he&apos;s also the world&apos;s foremost music-concert documentarian. In the grand tradition of Stop Making Sense and Neil Y [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string movies_2016_xml {
+            get {
+                return ResourceManager.GetString("movies_2016_xml", resourceCulture);
+            }
+        }
     }
 }

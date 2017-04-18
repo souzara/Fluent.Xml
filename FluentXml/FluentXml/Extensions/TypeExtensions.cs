@@ -22,12 +22,19 @@ namespace Fluent.Xml.Extensions
                 return type.GetGenericArguments().FirstOrDefault();
             return null;
         }
-        public static IList<object> CreateEnumerable(this Type type)
+
+
+        public static IEnumerable<object> CreateEnumerable(this Type type)
         {
             var listType = typeof(List<>);
             var genericType = listType.MakeGenericType(type);
 
-            return ((IEnumerable<object>)Activator.CreateInstance(genericType)).ToList();
+            return ((IEnumerable<object>)Activator.CreateInstance(genericType));
+        }
+        public static object CreateInstance(this Type type)
+        {
+
+            return Activator.CreateInstance(type);
         }
     }
 }

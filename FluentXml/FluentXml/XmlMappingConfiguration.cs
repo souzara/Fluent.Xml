@@ -30,7 +30,7 @@ namespace Fluent.Xml
             else
                 propName = ((MemberExpression)property.Body).Member.Name;
 
-            var xmlElementConfiguration = new XmlElementConfiguration<TObject>(propName);
+            var xmlElementConfiguration = new XmlElementConfiguration<TObject>(propName, typeof(TPropertyType));
             configurations.Add(xmlElementConfiguration);
             return xmlElementConfiguration;
         }
