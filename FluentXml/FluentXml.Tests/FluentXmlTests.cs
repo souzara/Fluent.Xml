@@ -14,6 +14,7 @@ namespace Fluent.Xml.Tests
             FluentXml.RegisterMap<FluentMappings.MoviesXmlMapping>();
             FluentXml.RegisterMap<FluentMappings.MovieXmlMapping>();
             FluentXml.RegisterMap<FluentMappings.AuthorXmlMapping>();
+            FluentXml.RegisterMap<FluentMappings.ReviewXmlMapping>();
         }
         [Fact]
         public void Should_Deserialize_Xml_into_a_object_based_in_type_definition()
