@@ -82,8 +82,8 @@ namespace Fluent.Xml
                     value = Deserialize(elementValue.ToString(), elementConfiguration.PropertyType);
 
                 elementType.SetValue(result, value);
-
             }
+
         }
 
         private static void DeserializeSimpleProperty(IXmlMappingConfiguration xmlMappingConfiguration, object result, XDocument xmlDocument)
@@ -112,6 +112,7 @@ namespace Fluent.Xml
 
                 elementType.SetValue(result, elementValue?.Value.ChangeType(elementType.PropertyType));
             }
+
         }
 
         public static IEnumerable<object> DeserializeEnumerable(string xml, Type type, string rootElementName)
@@ -135,32 +136,8 @@ namespace Fluent.Xml
                                     select el);
                     foreach (var element in elements)
                     {
-                        var item = type.CreateInstance();
-                        foreach (var elementConfiguration in xmlMappingConfiguration.Configurations)
-                        {
+                        var item = Deserialize(element.ToString(), type);
 
-                            var elementType = type.GetProperty(elementConfiguration.PropertyName);
-
-                            var elementName = elementConfiguration.Configurations.FirstOrDefault(x => x is WithNameConfiguration) as WithNameConfiguration ?? new WithNameConfiguration(elementConfiguration.PropertyName);
-
-                            var elementValue = (from el in element.Descendants()
-                                                where string.Equals(elementName.Name, el.Name.LocalName, StringComparison.OrdinalIgnoreCase)
-                                                select el).FirstOrDefault();
-
-                            foreach (AttributeConfiguration attribute in elementConfiguration.Configurations.Where(x => x is AttributeConfiguration))
-                            {
-                                var attributeType = type.GetProperty(attribute.PropertyName);
-                                var atttributeValue = (from at in elementValue.Attributes()
-                                                       where string.Equals(at.Name.LocalName, attribute.AttributeName, StringComparison.OrdinalIgnoreCase)
-                                                       select at).FirstOrDefault();
-
-                                attributeType.SetValue(item, atttributeValue?.Value.ChangeType(attributeType.PropertyType));
-
-
-                            }
-
-                            elementType.SetValue(item, elementValue?.Value.ChangeType(elementType.PropertyType));
-                        }
                         addMethodInfo.Invoke(result, new object[] { item });
                     }
                 }
@@ -257,13 +234,9 @@ namespace Fluent.Xml
             foreach (var value in values)
             {
                 var elements = new List<XElement>();
-                foreach (var xmlElementConfiguration in xmlMappingConfiguration.Configurations)
-                {
-                    var property = value.GetType().GetProperty(xmlElementConfiguration.PropertyName);
-                    var elementName = xmlElementConfiguration.Configurations.FirstOrDefault(x => x is WithNameConfiguration) as WithNameConfiguration ?? new WithNameConfiguration(xmlElementConfiguration.PropertyName);
-                    var propertyValue = property.GetValue(value);
-                    elements.Add(new XElement(XName.Get(elementName.Name), propertyValue));
-                }
+                var objectType = value.GetType();
+                elements.AddRange(SerializeSimpleProperty(value, GetXmlMappingConfiguration(objectType), objectType));
+                elements.AddRange(SerializeComplexProperty(value, GetXmlMappingConfiguration(objectType), objectType));
 
                 descendant.Add(new XElement(XName.Get(xmlMappingConfiguration.RootElementName), elements));
             }

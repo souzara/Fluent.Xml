@@ -22,10 +22,19 @@ namespace Fluent.Xml.Tests.Models
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public IEnumerable<Review> Reviews { get; set; }
     }
 
     public class AuthorXmlModel
     {
         public string Name { get; set; }
+    }
+
+    public class Review
+    {
+        public string Name { get; set; }
+        public short Stars { get; set; }
+        public string Description { get; set; }
+        public DateTime Date { get; set; }
     }
 }

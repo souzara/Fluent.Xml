@@ -23,6 +23,7 @@ namespace Fluent.Xml.Tests.FluentMappings
         {
             HasElement(x => x.Name);
             HasElement(x => x.Description);
+            HasElement(x => x.Reviews).Complex().WithName("Reviews");
         }
     }
 
@@ -31,6 +32,17 @@ namespace Fluent.Xml.Tests.FluentMappings
         public AuthorXmlMapping() : base("Author")
         {
             HasElement(x => x.Name);
+        }
+    }
+
+    public class ReviewXmlMapping : Fluent.Xml.XmlMappingConfiguration<Models.Review>
+    {
+        public ReviewXmlMapping() : base("Review")
+        {
+            HasElement(x => x.Name);
+            HasElement(x => x.Stars);
+            HasElement(x => x.Description);
+            HasElement(x => x.Date);
         }
     }
 }
