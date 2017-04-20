@@ -28,6 +28,7 @@ namespace Fluent.Xml.Tests.Models
     public class AuthorXmlModel
     {
         public string Name { get; set; }
+        public IEnumerable<MovieXmlModel> Movies { get; set; }
     }
 
     public class Review

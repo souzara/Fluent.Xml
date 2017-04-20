@@ -31,7 +31,8 @@ namespace Fluent.Xml.Tests.FluentMappings
     {
         public AuthorXmlMapping() : base("Author")
         {
-            HasElement(x => x.Name);
+            HasElement(x => x.Name);            
+            HasElement(x => x.Movies).WithName("Filmes").Complex();
         }
     }
 

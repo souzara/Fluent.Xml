@@ -216,13 +216,9 @@ namespace Fluent.Xml
             var descendantsElements = new List<XElement>();
             var xmlMappingConfiguration = GetXmlMappingConfiguration(propertyType);
             var descendant = new List<XElement>();
-            foreach (var xmlElementConfiguration in xmlMappingConfiguration.Configurations)
-            {
-                var property = value.GetType().GetProperty(xmlElementConfiguration.PropertyName);
-                var elementName = xmlElementConfiguration.Configurations.FirstOrDefault(x => x is WithNameConfiguration) as WithNameConfiguration ?? new WithNameConfiguration(xmlElementConfiguration.PropertyName);
-                var propertyValue = property.GetValue(value);
-                descendant.Add(new XElement(XName.Get(elementName.Name), propertyValue));
-            }
+            var objectType = value.GetType();
+            descendant.AddRange(SerializeSimpleProperty(value, GetXmlMappingConfiguration(objectType), objectType));
+            descendant.AddRange(SerializeComplexProperty(value, GetXmlMappingConfiguration(objectType), objectType));
             descendantsElements.Add(new XElement(XName.Get(xmlMappingConfiguration.RootElementName), descendant));
             return descendantsElements;
         }

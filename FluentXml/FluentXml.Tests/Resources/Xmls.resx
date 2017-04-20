@@ -188,6 +188,32 @@
   &lt;/MoviesList&gt;
   &lt;Author&gt;
 	&lt;Name&gt;Ricardo Alves&lt;/Name&gt;
+    &lt;Filmes&gt;
+        &lt;Movie&gt;
+            &lt;Name&gt;Ouija: Origin of Evil&lt;/Name&gt;
+            &lt;Description&gt;Just about everybody agreed that 2014's Ouija, based on the popular contact-the-dead board game, was a dud. But this Halloween season's follow-up, Origin of Evil, is an altogether different beast—a sterling '60s-set period piece that's only loosely related to its predecessor, and one that manufactures terror by first making one care about its well-drawn characters. In this case, those are a mother and two daughters who, while running a séance scam out of their home, wind up in real supernatural trouble when the youngest of their clan (Lulu Wilson) makes contact with what she initially believes is the spirit of her dead father. Another superb chiller from director Mike Flanagan (Oculus, Hush)—mainstream horror's best new filmmaker—about the peril that can come from grieving lost loved ones, this stylish work is a throwback in terms of not only its setting, but also its preference for hold-your-breath suspense and unforgettable otherworldly imagery over cheap scare tactics&lt;/Description&gt;
+            &lt;Reviews&gt;
+                &lt;Review&gt;
+                    &lt;Name&gt;Ricardo Alves&lt;/Name&gt;
+                    &lt;Stars&gt;4&lt;/Stars&gt;
+                    &lt;Description&gt;Very Good! (Ouija: Origin of Evil)&lt;/Description&gt;
+                    &lt;Date&gt;2017-04-19T00:00:00&lt;/Date&gt;
+                &lt;/Review&gt;
+                &lt;Review&gt;
+                    &lt;Name&gt;Alves&lt;/Name&gt;
+                    &lt;Stars&gt;4&lt;/Stars&gt;
+                    &lt;Description&gt;Very Good! (Ouija: Origin of Evil)&lt;/Description&gt;
+                    &lt;Date&gt;2017-04-19T00:00:00&lt;/Date&gt;
+                &lt;/Review&gt;
+                &lt;Review&gt;
+                    &lt;Name&gt;Ricardo&lt;/Name&gt;
+                    &lt;Stars&gt;1&lt;/Stars&gt;
+                    &lt;Description&gt;;( (Ouija: Origin of Evil)&lt;/Description&gt;
+                    &lt;Date&gt;2017-04-19T00:00:00&lt;/Date&gt;
+                &lt;/Review&gt;
+            &lt;/Reviews&gt;
+        &lt;/Movie&gt;
+    &lt;/Filmes&gt;
   &lt;/Author&gt;
 &lt;/Movies&gt;</value>
   </data>
