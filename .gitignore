@@ -10,3 +10,7 @@
 /FluentXml/.vs/FluentXml
 /.vs
 /.vs
+/FluentXml/FluentXml/obj/Release
+/FluentXml/FluentXml/GerarPacoteNuget.bat
+/FluentXml/FluentXml/Fluent.Xml.1.2.1.nupkg
+/FluentXml/FluentXml/bin/Release
