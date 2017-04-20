@@ -74,12 +74,16 @@ namespace Fluent.Xml
                 var elementValue = (from el in xmlDocument.Descendants()
                                     where string.Equals(elementName.Name, el.Name.LocalName, StringComparison.OrdinalIgnoreCase)
                                     select el).FirstOrDefault();
-
                 object value;
                 if (elementConfiguration.PropertyType.IsEnumerable())
-                    value = DeserializeEnumerable(elementValue.ToString(), elementConfiguration.PropertyType.GetGenericArgument(), elementName.Name);
+                {
+                    value = DeserializeEnumerable(xmlDocument.ToString(), elementConfiguration.PropertyType.GetGenericArgument(), elementName.Name);
+                }
                 else
+                {
+
                     value = Deserialize(elementValue.ToString(), elementConfiguration.PropertyType);
+                }
 
                 elementType.SetValue(result, value);
             }
@@ -129,19 +133,12 @@ namespace Fluent.Xml
                                     where string.Equals(rootElementName, el.Name.LocalName, StringComparison.OrdinalIgnoreCase)
                                     select el);
 
-                foreach (var rootElement in rootElements)
+                foreach (var element in rootElements)
                 {
-                    var elements = (from el in rootElement.Descendants()
-                                    where string.Equals(xmlMappingConfiguration.RootElementName, el.Name.LocalName, StringComparison.OrdinalIgnoreCase)
-                                    select el);
-                    foreach (var element in elements)
-                    {
-                        var item = Deserialize(element.ToString(), type);
+                    var item = Deserialize(element.ToString(), type);
 
-                        addMethodInfo.Invoke(result, new object[] { item });
-                    }
+                    addMethodInfo.Invoke(result, new object[] { item });
                 }
-
 
             }
 
@@ -226,7 +223,7 @@ namespace Fluent.Xml
         {
             var descendantsElements = new List<XElement>();
             var xmlMappingConfiguration = GetXmlMappingConfiguration(propertyInfo.PropertyType.GetGenericArgument());
-            var descendant = new List<XElement>();
+            //var descendant = new List<XElement>();
             foreach (var value in values)
             {
                 var elements = new List<XElement>();
@@ -234,9 +231,9 @@ namespace Fluent.Xml
                 elements.AddRange(SerializeSimpleProperty(value, GetXmlMappingConfiguration(objectType), objectType));
                 elements.AddRange(SerializeComplexProperty(value, GetXmlMappingConfiguration(objectType), objectType));
 
-                descendant.Add(new XElement(XName.Get(xmlMappingConfiguration.RootElementName), elements));
+                descendantsElements.Add(new XElement(XName.Get(xmlMappingConfiguration.RootElementName), elements));
             }
-            descendantsElements.Add(new XElement(XName.Get(descendantName.Name), descendant));
+            //descendantsElements.Add(new XElement(XName.Get(descendantName.Name), descendant));
 
             return descendantsElements;
         }

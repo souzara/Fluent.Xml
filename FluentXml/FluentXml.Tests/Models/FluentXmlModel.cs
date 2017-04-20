@@ -13,4 +13,5 @@ namespace Fluent.Xml.Tests.Models
         public string Description { get; set; }
         public int Id { get; set; }
     }
+
 }

@@ -12,7 +12,7 @@ namespace Fluent.Xml.Tests.FluentMappings
         {
             HasElement(x => x.Total);
             HasElement(x => x.Year);
-            HasElement(x => x.Movies).Complex().WithName("MoviesList");
+            HasElement(x => x.MoviesList).Complex();//.WithName("MoviesList");
             HasElement(x => x.Author).Complex();
         }
     }
@@ -32,7 +32,7 @@ namespace Fluent.Xml.Tests.FluentMappings
         public AuthorXmlMapping() : base("Author")
         {
             HasElement(x => x.Name);            
-            HasElement(x => x.Movies).WithName("Filmes").Complex();
+            HasElement(x => x.Movies).WithName("Movie").Complex();
         }
     }
 
@@ -45,5 +45,22 @@ namespace Fluent.Xml.Tests.FluentMappings
             HasElement(x => x.Description);
             HasElement(x => x.Date);
         }
+    }
+
+    public class MoviesListXmlMapping : Fluent.Xml.XmlMappingConfiguration<Models.MoviesList>
+    {
+        public MoviesListXmlMapping()
+        {
+            HasElement(x => x.Movie).Complex();
+        }
+    }
+
+    public class ReviewsXmlMapping : Fluent.Xml.XmlMappingConfiguration<Models.Reviews>
+    {
+        public ReviewsXmlMapping() : base("Reviews")
+        {
+            HasElement(x => x.Review).Complex();
+        }
+
     }
 }

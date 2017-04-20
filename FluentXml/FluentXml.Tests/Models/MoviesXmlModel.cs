@@ -11,18 +11,24 @@ namespace Fluent.Xml.Tests.Models
         public int Total { get; set; }
         public int Year { get; set; }
         public AuthorXmlModel Author { get; set; }
-        public IEnumerable<MovieXmlModel> Movies { get; set; }
+        public MoviesList MoviesList { get; set; }
+
         public MoviesXmlModel()
         {
-            Movies = Enumerable.Empty<MovieXmlModel>();
+            
         }
+    }
+
+    public class MoviesList
+    {
+        public IEnumerable<MovieXmlModel> Movie { get; set; }
     }
 
     public class MovieXmlModel
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public IEnumerable<Review> Reviews { get; set; }
+        public Reviews Reviews { get; set; }
     }
 
     public class AuthorXmlModel
@@ -30,7 +36,10 @@ namespace Fluent.Xml.Tests.Models
         public string Name { get; set; }
         public IEnumerable<MovieXmlModel> Movies { get; set; }
     }
-
+    public class Reviews
+    {
+        public IEnumerable<Review> Review { get; set; }
+    }
     public class Review
     {
         public string Name { get; set; }

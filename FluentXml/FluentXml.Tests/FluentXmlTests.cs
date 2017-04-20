@@ -15,6 +15,10 @@ namespace Fluent.Xml.Tests
             FluentXml.RegisterMap<FluentMappings.MovieXmlMapping>();
             FluentXml.RegisterMap<FluentMappings.AuthorXmlMapping>();
             FluentXml.RegisterMap<FluentMappings.ReviewXmlMapping>();
+            FluentXml.RegisterMap<FluentMappings.MoviesListXmlMapping>();
+            FluentXml.RegisterMap<FluentMappings.ReviewsXmlMapping>();
+            
+
         }
         [Fact]
         public void Should_Deserialize_Xml_into_a_object_based_in_type_definition()
@@ -43,6 +47,15 @@ namespace Fluent.Xml.Tests
         }
 
         [Fact]
+        public void Testar()
+        {
+            var obj = FluentXml.Deserialize<Models.FluentXmlModel>(Resources.Xmls.fluentxml_xml);
+
+            var xml = FluentXml.Serialize(obj);
+
+        }
+
+        [Fact]
         public void ShouldDeserialize_Complex_Xml_into_a_object_based_in_type_definition()
         {
             var obj = FluentXml.Deserialize<Models.MoviesXmlModel>(Resources.Xmls.movies_2016_xml);
@@ -50,8 +63,9 @@ namespace Fluent.Xml.Tests
             Assert.NotNull(obj);
             Assert.Equal(3, obj.Total);
             Assert.Equal(2016, obj.Year);
-            Assert.NotNull(obj.Movies);
-            Assert.Equal(3, obj.Movies.Count());
+            Assert.NotNull(obj.MoviesList);
+            Assert.NotNull(obj.MoviesList.Movie);
+            Assert.Equal(3, obj.MoviesList.Movie.Count());
             Assert.NotNull(obj.Author);
             Assert.Equal(obj.Author.Name, "Ricardo Alves");
         }
